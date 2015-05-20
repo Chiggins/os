@@ -4,7 +4,7 @@
 # Run upgrade and then install some software
 apt-get update && apt-get update -y && apt-get install -y zsh ctags shutter bless htop filezilla irssi
 
-curl -L https://github.com/roibbyrussell/oh-my-zsh/raw/master/tools/install.sh | share
+curl -L https://github.com/roibbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 if [ -d ~/.zshrc ]
 then
     rm ~/.zshrc
