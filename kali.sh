@@ -2,7 +2,7 @@
 # Chiggins bootstrap script for Kali
 
 # Run upgrade and then install some software
-apt-get update && apt-get update -y && apt-get install zsh ctags shutter bless htop filezilla irssi
+apt-get update && apt-get update -y && apt-get install -y zsh ctags shutter bless htop filezilla irssi
 
 curl -L https://github.com/roibbyrussell/oh-my-zsh/raw/master/tools/install.sh | share
 if [ -d ~/.zshrc ]
