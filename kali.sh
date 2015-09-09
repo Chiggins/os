@@ -20,3 +20,6 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby
 ln -s /usr/local/rvm/ ~/.rvm
 
 [ -e /usr/share/wordlists/rockyou.txt.gz ] && gzip -dc < /usr/share/wordlists/rockyou.txt.gz > /usr/share/wordlists/rockyou.txt
+
+# Remove this script
+rm kali.sh
