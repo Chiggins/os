@@ -2,7 +2,7 @@
 # Chiggins bootstrap script for Remnux
 
 # Install zsh, oh-my-zsh, and custom theme
-apt-get install -y zsh
+apt-get install -y zsh ctags
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 if [ -d ~/.zshrc ]
 then
