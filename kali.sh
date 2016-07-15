@@ -21,5 +21,7 @@ ln -s /usr/local/rvm/ ~/.rvm
 
 [ -e /usr/share/wordlists/rockyou.txt.gz ] && gzip -dc < /usr/share/wordlists/rockyou.txt.gz > /usr/share/wordlists/rockyou.txt
 
+git clone https://github.com/leebaird/discover /opt/discover/
+
 # Remove this script
 rm kali.sh
