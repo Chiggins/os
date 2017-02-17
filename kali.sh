@@ -14,6 +14,15 @@ wget https://github.com/Chiggins/DotFiles/raw/master/zsh/.zshrc -O ~/.zshrc --no
 wget https://github.com/Chiggins/DotFiles/raw/master/zsh/chiggins.zsh-theme -O ~/.oh-my-zsh/themes/chiggins.zsh-theme --no-check-certificate
 chsh -s /bin/zsh
 
+echo 'runtime vimrc' > ~/.vimrc
+if [ ! -d ~/.vim ]
+then
+    mkdir ~/.vim
+fi
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+wget https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/vim/.vimrc --no-check-certificate
+vim +PluginInstall +qall
+
 wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
 
 [ -e /usr/share/wordlists/rockyou.txt.gz ] && gzip -dc < /usr/share/wordlists/rockyou.txt.gz > /usr/share/wordlists/rockyou.txt
