@@ -12,7 +12,7 @@ fi
 
 wget https://github.com/Chiggins/DotFiles/raw/master/zsh/.zshrc -O ~/.zshrc --no-check-certificate
 wget https://github.com/Chiggins/DotFiles/raw/master/zsh/chiggins.zsh-theme -O ~/.oh-my-zsh/themes/chiggins.zsh-theme --no-check-certificate
-chsh -s /usr/bin/zsh
+chsh -s /bin/zsh
 
 wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
 
