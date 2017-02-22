@@ -20,7 +20,7 @@ then
     mkdir ~/.vim
 fi
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
-wget https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/vim/.vimrc --no-check-certificate
+wget https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/.vimrc --no-check-certificate
 vim +PluginInstall +qall
 
 wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
