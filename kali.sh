@@ -35,7 +35,7 @@ print_info () {
 }
 
 install () {
-    apt -qq -y install $1 \
+    apt -qq -y install $* \
       || print_bad "Error installing $1"
 }
 
