@@ -484,11 +484,18 @@ popd > /dev/null
 git clone -q https://github.com/threatexpress/domainhunter.git /opt/domainhunter
 pip install -qr /opt/domainhunter/requirements.txt
 
-# Grabbing this just to have it local
+##########
+# Scripts to have locally
+
 # MailSniper
 print_info "Grabbing MailSniper"
-mkdir -p ~/code/
-wget -q https://raw.githubusercontent.com/dafthack/MailSniper/master/MailSniper.ps1 -O ~/code/MailSniper.ps1
+mkdir -p ~/scripts/
+wget -q https://raw.githubusercontent.com/dafthack/MailSniper/master/MailSniper.ps1 -O ~/scripts/MailSniper.ps1
+
+# PowerSploit
+git clone -q -b master https://github.com/PowerShellMafia/PowerSploit.git ~/scripts/PowerSploit-master/
+git clone -q -b dev https://github.com/PowerShellMafia/PowerSploit.git ~/scripts/PowerSploit-dev/
+
 
 # Stuff for Cobalt Strike
 print_info "Cobalt Strike"
