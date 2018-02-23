@@ -112,6 +112,7 @@ systemctl restart ntp
 # Running upgrade on everything currently installed
 # Also cleaning up whatever can be removed
 print_info "Running full system upgrade and cleanup"
+export DEBIAN_FRONTENnoninteractive
 apt -qq -y autoremove || print_bad "Error running first autoremove" > /dev/null
 apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing > /dev/null \
     || print_bad "Error performing the mass OS upgrade"
