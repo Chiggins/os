@@ -385,13 +385,13 @@ if [ ! -d ~/.vim ]
 then
     mkdir ~/.vim
 fi
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
-wget https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/.vimrc --no-check-certificate
+git clone -q https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+wget -q https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/.vimrc --no-check-certificate
 vim +PluginInstall +qall
 
 # Configure tmux
 print_info "Configure tmux"
-wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
+wget -q https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
 
 # Wordlist stuff
 [ -e /usr/share/wordlists/rockyou.txt.gz ] && gzip -dc < /usr/share/wordlists/rockyou.txt.gz > /usr/share/wordlists/rockyou.txt
@@ -413,95 +413,96 @@ curl -s -L https://asciinema.org/install | sh
 
 # Discover - Used to automating tasks
 print_info "Installing Discover"
-git clone https://github.com/leebaird/discover /opt/discover/
+git clone -q https://github.com/leebaird/discover /opt/discover/
 ln -s /opt/discover/discover.sh /usr/bin/discover
 
 # domain - Better used to find domain names for a website
 print_info "Installing Domain"
-git clone https://github.com/jhaddix/domain /tmp/domain/
-cd /tmp/domain/
+git clone -q https://github.com/jhaddix/domain /tmp/domain/
+pushd /tmp/domain/ > /dev/null
 echo "/opt/enumall/" | ./setup_enumall.sh
-pip install -r /opt/enumall/altdns/requirements.txt
-pip install -r /opt/enumall/recon-ng/REQUIREMENTS
+pip install -qr /opt/enumall/altdns/requirements.txt
+pip install -qr /opt/enumall/recon-ng/REQUIREMENTS
 ln -s /opt/enumall/domain/enumall.py /usr/bin/enumall
-cd ~
+popd > /dev/null
 
 # Sublist3r
 print_info "Installing sublist3r"
-git clone https://github.com/aboul3la/Sublist3r.git /opt/sublist3r/
-pip install -r /opt/sublist3r/requirements.txt
+git clone -q https://github.com/aboul3la/Sublist3r.git /opt/sublist3r/
+pip install -qr /opt/sublist3r/requirements.txt
 ln -s /opt/sublist3r/sublist3r.py /usr/bin/sublist3r
 chmod +x /usr/bin/sublist3r
 
 # MassDNS
 print_info "Installing MassDNS"
-git clone https://github.com/blechschmidt/massdns.git /opt/massdns
-cd /opt/massdns/
+git clone -q https://github.com/blechschmidt/massdns.git /opt/massdns
+pushd /opt/massdns/ > /dev/null
 make
 ln -s /opt/massdns/bin/massdns /usr/bin/massdns
 ln -s /opt/massdns/subbrute.py /usr/bin/subbrute
+popd > /dev/null
 
 # Parameth
 print_info "Installing Parameth"
-git clone https://github.com/mak-/parameth.git /opt/parameth/
+git clone -q https://github.com/mak-/parameth.git /opt/parameth/
 ln -s /opt/parameth/parameth.py /usr/bin/parameth
 
 # TPLMap
 print_info "Installing TPLMap"
-git clone https://github.com/epinna/tplmap.git /opt/tplmap/
+git clone -q https://github.com/epinna/tplmap.git /opt/tplmap/
 ln -s /opt/tplmap/tplmap.py /usr/bin/tplmap
 
 # Powershell Empire
 print_info "Installing Powershell Empire"
-git clone https://github.com/EmpireProject/Empire /opt/empire/
-cd /opt/empire/setup/
+git clone -q https://github.com/EmpireProject/Empire /opt/empire/
+pushd /opt/empire/setup/ > /dev/null
 ./install.sh
 echo "IyEvYmluL2Jhc2gKcHVzaGQgL29wdC9lbXBpcmUvICYmIC4vZW1waXJlIC0tcmVzdCAtLXVzZXJuYW1lIHVzZXIgLS1wYXNzd29yZCBwYXNzICYmIHBvcGQK" | base64 -d > /usr/bin/empire && chmod +x /usr/bin/empire
-cd ~
+popd > /dev/null
 
 # DeathStar
 print_info "Installing DeathStar"
-git clone https://github.com/byt3bl33d3r/DeathStar /opt/deathstar/
-pip install -r /opt/deathstar/requirements.txt
+git clone -q https://github.com/byt3bl33d3r/DeathStar /opt/deathstar/
+pip install -qr /opt/deathstar/requirements.txt
 
 # EyeWitness
 print_info "Installing EyeWitness"
-git clone https://github.com/ChrisTruncer/EyeWitness /opt/eyewitness/
-cd /opt/eyewitness/setup/
+git clone -q https://github.com/ChrisTruncer/EyeWitness /opt/eyewitness/
+pushd /opt/eyewitness/setup/ > /dev/null
 ./setup.sh
-cd ~
+popd > /dev/null
 
 # Win Payloads
 print_info "Installing WindPayloads"
-git clone https://github.com/nccgroup/Winpayloads.git /opt/winpayloads
-cd /opt/winpayloads/
+git clone -q https://github.com/nccgroup/Winpayloads.git /opt/winpayloads
+pushd /opt/winpayloads/ > /dev/null
 chmod +x setup.sh
 #./setup.s
-cd ~
+popd > /dev/null
 
 # DomainHunter
-git clone https://github.com/threatexpress/domainhunter.git /opt/domainhunter
-pip install -r /opt/domainhunter/requirements.txt
+git clone -q https://github.com/threatexpress/domainhunter.git /opt/domainhunter
+pip install -qr /opt/domainhunter/requirements.txt
 
 # Grabbing this just to have it local
 # MailSniper
 print_info "Grabbing MailSniper"
-mkdir ~/code/
-wget https://raw.githubusercontent.com/dafthack/MailSniper/master/MailSniper.ps1 -O ~/code/MailSniper.ps1
+mkdir -p ~/code/
+wget -q https://raw.githubusercontent.com/dafthack/MailSniper/master/MailSniper.ps1 -O ~/code/MailSniper.ps1
 
 # Stuff for Cobalt Strike
 print_info "Cobalt Strike"
 print_info "Java"
 JDK_LINK=$(curl -s "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" | grep 'linux-x64.tar.gz' | head -n 1 | awk -F, '{print $3}' | awk -F'":' '{print $2}' | tr -d '"')
 timeout 300 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "$JDK_LINK" -O /opt/jdk.tar.gz
-tar -xzvf /opt/jdk.tar.gz -C /opt/
+tar -xzf /opt/jdk.tar.gz -C /opt/
 JDK_DIR=$(ls -a /opt/ | grep jdk | head -n 1)
-update-alternatives --install /usr/bin/java java /opt/$JDK_DIR/bin/java 1
-update-alternatives --install /usr/bin/javac javac /opt/$JDK_DIR/bin/javac 1
-update-alternatives --install /usr/lib/mozilla/plugins/libjavaplugin.so mozilla-javaplugin.so /opt/$JDK_DIR/jre/lib/amd64/libnpjp2.so 1
-update-alternatives --set java /opt/$JDK_DIR/bin/java
-update-alternatives --set javac /opt/$JDK_DIR/bin/javac
-update-alternatives --set mozilla-javaplugin.so /opt/$JDK_DIR/jre/lib/amd64/libnpjp2.so
+update-alternatives --install /usr/bin/java java /opt/$JDK_DIR/bin/java 1 > /dev/null
+update-alternatives --install /usr/bin/javac javac /opt/$JDK_DIR/bin/javac 1 > /dev/null
+update-alternatives --install /usr/lib/mozilla/plugins/libjavaplugin.so mozilla-javaplugin.so /opt/$JDK_DIR/jre/lib/amd64/libnpjp2.so 1 > /dev/null
+update-alternatives --set java /opt/$JDK_DIR/bin/java > /dev/null
+update-alternatives --set javac /opt/$JDK_DIR/bin/javac > /dev/null
+update-alternatives --set mozilla-javaplugin.so /opt/$JDK_DIR/jre/lib/amd64/libnpjp2.so > /dev/null
 rm -f /opt/jdk.tar.gz
 
 print_info "Malleable C2"
@@ -519,25 +520,21 @@ git pull -q
 popd >/dev/null
 mkdir -p /opt/cs_scripts/kickass_bot/
 git clone -q -b master https://github.com/kussic/CS-KickassBot.git /opt/cs_scripts/kickass_bot/
-  || echo -e ' '${RED}'[!] Issue when git cloning'${RESET} 1>&2
 pushd /opt/cs_scripts/kickass_bot/ >/dev/null
 git pull -q
 popd >/dev/null
 mkdir -p /opt/cs_scripts/persistence_aggressor_scripts/
 git clone -q -b master https://github.com/ZonkSec/persistence-aggressor-script.git /opt/cs_scripts/persistence_aggressor_scripts/
-  || echo -e ' '${RED}'[!] Issue when git cloning'${RESET} 1>&2
 pushd /opt/cs_scripts/persistence_aggressor_scripts/ >/dev/null
 git pull -q
 popd >/dev/null
 mkdir -p /opt/cs_scripts/harleyqu1nn_aggressor_scripts/
 git clone -q -b master https://github.com/harleyQu1nn/AggressorScripts.git /opt/cs_scripts/harleyqu1nn_aggressor_scripts/
-  || echo -e ' '${RED}'[!] Issue when git cloning'${RESET} 2>&2
 pushd /opt/cs_scripts/harleyqu1nn_aggressor_scripts/ > /dev/null
 git pull -q
 popd >/dev/null
 mkdir -p /opt/cs_scripts/ramen0x3f_scripts/
 git clone -q -b master https://github.com/ramen0x3f/AggressorScripts.git /opt/cs_scripts/ramen0x3f_scripts/
-  || echo -e ' '${RED}'[!] Issue when git cloning'${RESET} 2>&2
 pushd /opt/cs_scripts/ramen0x3f_scripts/ > /dev/null
 git pull -q
 popd >/dev/null
