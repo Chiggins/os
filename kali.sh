@@ -43,13 +43,14 @@ install () {
 print_info "GNOME changes"
 ## Disable upgrade notification
 timeout 5 killall -w /usr/lib/apt/methods/http >/dev/null 2>&1
-gsetting set org.gnome.desktop.interface clockpshow-date true
+gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface clock-format 12h
 
 ## Disable screensaver
 xset s 0 0
 xset s off
-echo "xset s off" >> /root/.xinitrc 
-   gsettings set org.gnome.desktop.session idle-delay 0
+echo "xset s off" >> /root/.xinitrc
+gsettings set org.gnome.desktop.session idle-delay 0
 
 # Make sure we have internet access
 print_info "Verifying internet access"
