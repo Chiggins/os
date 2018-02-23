@@ -19,19 +19,19 @@ RESET="\033[00m"       # Normal
 
 # Setup some basic functins
 print_good () {
-    echo "${GREEN}[+]${RESET} $1"
+    echo -e "${GREEN}[+]${RESET} $1"
 }
 
 print_bad () {
-    echo "${RED}[!]${RESET} $1"
+    echo -e "${RED}[!]${RESET} $1"
 }
 
 print_caution () {
-    echo "${YELLOW}[*]${RESET} $1"
+    echo -e "${YELLOW}[*]${RESET} $1"
 }
 
 print_info () {
-    echo "${BLUE}[>]${RESET} $1"
+    echo -e "${BLUE}[>]${RESET} $1"
 }
 
 install () {
