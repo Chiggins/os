@@ -113,10 +113,10 @@ systemctl restart ntp
 # Also cleaning up whatever can be removed
 print_info "Running full system upgrade and cleanup"
 export DEBIAN_FRONTEN=noninteractive
-apt -qq -y autoremove || print_bad "Error running first autoremove" > /dev/null
-apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing > /dev/null \
+apt -qq -y autoremove || print_bad "Error running first autoremove"
+apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing \
     || print_bad "Error performing the mass OS upgrade"
-apt -qq -y autoremove > /dev/null || print_bad "Error running second autoremove"
+apt -qq -y autoremove || print_bad "Error running second autoremove"
 
 # Install Linux headers and build tools
 print_info "Installing Linux headers and build tools"
