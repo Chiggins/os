@@ -61,7 +61,7 @@ if [[ "$?" -ne 0 ]]; then
 fi
 
 # Grab wallpaper and set
-wget https://i.imgur.com/ybtytfq.jpg -O /root/Pictures/wallpaper.jpg
+wget -q https://i.imgur.com/ybtytfq.jpg -O /root/Pictures/wallpaper.jpg
 gsettings set org.gnome.desktop.background picture-uri file:///root/Pictures/wallpaper.jpg
 
 # Are we in a VM?
@@ -69,11 +69,11 @@ print_info "VM check"
 ## Only going to check VMware because who uses VirtualBox?
 if (dmidecode | grep -iq vmware); then
     print_info "VMware"
-    apt -y -qq install open-vm-tools-desktop make
+    install open-vm-tools-desktop make
 
     # Setup shared folders
     file=/usr/local/sbin/mount-shared-folders; [ -e "${file}" ] && cp -n $file{,.backup}
-    cat <<EOF > "${mount_file}" \
+    cat <<EOF > "${file}" \
 #!/bin/bash
 
 vmware-hgfsclient | while read folder; do
@@ -100,7 +100,7 @@ fi
 ## Set timezone to Chicago as the default
 echo $timezone > /etc/timezone
 ln -sf "/usr/share/zoneinfo/$(cat /etc/timezone)" /etc/localtime
-dpkg-reconfigure -f noninteractive tzdata
+dpkg-reconfigure -f noninteractive tzdata > /dev/null
 
 ## install and configure NTP
 print_info "Configuring NTP"
@@ -112,10 +112,10 @@ systemctl restart ntp
 # Running upgrade on everything currently installed
 # Also cleaning up whatever can be removed
 print_info "Running full system upgrade and cleanup"
-apt -qq -y autoremove || print_bad "Error running first autoremove"
-apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing 2>&1 \
+apt -qq -y autoremove || print_bad "Error running first autoremove" > /dev/null
+apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing > /dev/null \
     || print_bad "Error performing the mass OS upgrade"
-apt -qq -y autoremove || print_bad "Error running second autoremove"
+apt -qq -y autoremove > /dev/null || print_bad "Error running second autoremove"
 
 # Install Linux headers and build tools
 print_info "Installing Linux headers and build tools"
@@ -131,7 +131,7 @@ install zsh ctags shutter bless htop tmux crackmapexec docker docker-compose \
     wdiff-doc vbindiff burpsuit virtualenvwrapper golang wireshark libreoffice \
     shutter psmisc htop pwgen ca-certificates testssl.sh windows-binaries \
     ncftp hashid wafw00f pixiewps bully wifite gobuster stunnel gcc \
-    gcc-multilib g++ cc mingw-w64 veil-evasion responder 
+    gcc-multilib g++ cc mingw-w64 veil-evasion responder
 
 # Setup firefox
 print_info "Setting up Firefox"
@@ -205,47 +205,47 @@ mkdir -p "${ffpath}/"
 #curl --progress -k -L -f "https://addons.mozilla.org/en-GB/firefox/addon/httpfox/??????????????"  \
 #  || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'HttpFox' 1>&2
 #--- SQLite Manager
-echo -n '[1/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/5817/addon-5817-latest.xpi?src=dp-btn-primary" \
+echo -n '[1/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/5817/addon-5817-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/SQLiteManager@mrinalkant.blogspot.com.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'SQLite Manager'" 1>&2
 #--- Cookies Manager+
-echo -n '[2/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/92079/addon-92079-latest.xpi?src=dp-btn-primary" \
+echo -n '[2/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/92079/addon-92079-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/{bb6bc1bb-f824-4702-90cd-35e2fb24f25d}.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'Cookies Manager+'" 1>&2
 #--- Firebug
-echo -n '[3/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/1843/addon-1843-latest.xpi?src=dp-btn-primary" \
+echo -n '[3/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/1843/addon-1843-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/firebug@software.joehewitt.com.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'Firebug'" 1>&2
 #--- FoxyProxy Basic
-echo -n '[4/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/15023/addon-15023-latest.xpi?src=dp-btn-primary" \
+echo -n '[4/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/15023/addon-15023-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/foxyproxy-basic@eric.h.jung.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'FoxyProxy Basic'" 1>&2
 #--- User Agent Overrider
-echo -n '[5/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/429678/addon-429678-latest.xpi?src=dp-btn-primary" \
+echo -n '[5/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/429678/addon-429678-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/useragentoverrider@qixinglu.com.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'User Agent Overrider'" 1>&2
 #--- HTTPS Everywhere
-echo -n '[6/11]'; timeout 300 curl --progress -k -L -f "https://www.eff.org/files/https-everywhere-latest.xpi" \
+echo -n '[6/11]'; timeout 300 curl -S -k -L -f "https://www.eff.org/files/https-everywhere-latest.xpi" \
   -o "${ffpath}/https-everywhere@eff.org.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'HTTPS Everywhere'" 1>&2
 #--- Live HTTP Headers
-echo -n '[7/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/3829/addon-3829-latest.xpi?src=dp-btn-primary" \
+echo -n '[7/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/3829/addon-3829-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/{8f8fe09b-0bd3-4470-bc1b-8cad42b8203a}.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'Live HTTP Headers'" 1>&2
 #---Tamper Data
-echo -n '[8/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/966/addon-966-latest.xpi?src=dp-btn-primary" \
+echo -n '[8/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/966/addon-966-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/{9c51bd27-6ed8-4000-a2bf-36cb95c0c947}.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'Tamper Data'" 1>&2
 #--- Disable Add-on Compatibility Checks
-echo -n '[9/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/300254/addon-300254-latest.xpi?src=dp-btn-primary" \
+echo -n '[9/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/300254/addon-300254-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/check-compatibility@dactyl.googlecode.com.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'Disable Add-on Compatibility Checks'" 1>&2
 #--- Disable HackBar
-echo -n '[10/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/3899/addon-3899-latest.xpi?src=dp-btn-primary" \
+echo -n '[10/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/3899/addon-3899-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/{F5DDF39C-9293-4d5e-9AA8-E04E6DD5E9B4}.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'HackBar'" 1>&2
 #--- uBlock
-echo -n '[11/11]'; timeout 300 curl --progress -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/607454/addon-607454-latest.xpi?src=dp-btn-primary" \
+echo -n '[11/11]'; timeout 300 curl -S -k -L -f "https://addons.mozilla.org/firefox/downloads/latest/607454/addon-607454-latest.xpi?src=dp-btn-primary" \
   -o "${ffpath}/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}.xpi" \
     || echo -e ' '${RED}'[!]'${RESET}" Issue downloading 'uBlock'" 1>&2
 #--- Installing extensions
