@@ -114,7 +114,7 @@ systemctl restart ntp
 print_info "Running full system upgrade and cleanup"
 export DEBIAN_FRONTEN=noninteractive
 apt -qq -y autoremove || print_bad "Error running first autoremove"
-apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing \
+apt -qq update && APT_LIST_CHANGES_FRONTEND=none apt -qq -o Dpkg::Options::="--force-confnew" -y dist-upgrade --fix-missing \
     || print_bad "Error performing the mass OS upgrade"
 apt -qq -y autoremove || print_bad "Error running second autoremove"
 
