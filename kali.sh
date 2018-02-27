@@ -486,6 +486,15 @@ popd > /dev/null
 git clone -q https://github.com/threatexpress/domainhunter.git /opt/domainhunter
 pip install -qr /opt/domainhunter/requirements.txt
 
+# CatMyFish
+git clone -q https://github.com/Mr-Un1k0d3r/CatMyFish.git /opt/catmyfish
+cat <<EOF > /usr/bin/catmyfish \
+#!/bin/bash
+
+python /opt/catmyfish/CatMyFish.py $*
+EOF
+chmod +x /usr/bin/catmyfish
+
 ##########
 # Scripts to have locally
 
