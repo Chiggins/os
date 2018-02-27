@@ -127,12 +127,13 @@ print_info "Install the full Kali Linux meta-package if it isn't already install
 install kali-linux-full
 
 # Run upgrade and then install some software
+print_info "Installing other specified software"
 apt -qq -y install zsh ctags shutter bless htop tmux crackmapexec docker docker-compose \
     libldns-dev freerdp-x11 unzip curl firefox-esr exe2hexbat msfpc wdiff \
-    wdiff-doc vbindiff burpsuit virtualenvwrapper golang wireshark libreoffice \
+    wdiff-doc vbindiff virtualenvwrapper golang wireshark libreoffice \
     shutter psmisc htop pwgen ca-certificates testssl.sh windows-binaries \
     ncftp hashid wafw00f pixiewps bully wifite gobuster stunnel gcc \
-    gcc-multilib g++ cc mingw-w64 veil-evasion responder
+    gcc-multilib g++ mingw-w64 veil-evasion responder
 
 # Setup firefox
 print_info "Setting up Firefox"
