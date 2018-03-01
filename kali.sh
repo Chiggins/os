@@ -495,6 +495,9 @@ python /opt/catmyfish/CatMyFish.py $*
 EOF
 chmod +x /usr/bin/catmyfish
 
+# CredNinja
+git clone -q https://github.com/raikia/CredNinja.git /opt/credninja
+
 ##########
 # Scripts to have locally
 
