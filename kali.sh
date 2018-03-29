@@ -519,6 +519,9 @@ git clone -q https://github.com/Kevin-Robertson/Invoke-TheHash.git ~/scripts/Inv
 # Session Gopher
 git clone -q https://github.com/fireeye/SessionGopher.git ~/scripts/SessionGopher/
 
+# Tomato PS Scrips
+git clone -q https://github.com/dev-tomato/PowerShellScripts.git ~/scripts/TomatoPowershell/
+
 # Stuff for Cobalt Strike
 print_info "Cobalt Strike"
 print_info "Java"
