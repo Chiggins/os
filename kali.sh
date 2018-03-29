@@ -510,6 +510,14 @@ wget -q https://raw.githubusercontent.com/dafthack/MailSniper/master/MailSniper.
 git clone -q -b master https://github.com/PowerShellMafia/PowerSploit.git ~/scripts/PowerSploit-master/
 git clone -q -b dev https://github.com/PowerShellMafia/PowerSploit.git ~/scripts/PowerSploit-dev/
 
+# PowerLessShell
+git clone -q https://github.com/Mr-Un1k0d3r/PowerLessShell.git ~/scripts/PowerLessShell/
+
+# Invoke-TheHash
+git clone -q https://github.com/Kevin-Robertson/Invoke-TheHash.git ~/scripts/Invoke-TheHash/
+
+# Session Gopher
+git clone -q https://github.com/fireeye/SessionGopher.git ~/scripts/SessionGopher/
 
 # Stuff for Cobalt Strike
 print_info "Cobalt Strike"
