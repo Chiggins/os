@@ -8,8 +8,8 @@ if [ -d ~/.zshrc ]
 then
     rm ~/.zshrc
 fi
-wget https://github.com/Chiggins/DotFiles/raw/master/zsh/.zshrc -O ~/.zshrc --no-check-certificate
-wget https://github.com/Chiggins/DotFiles/raw/master/zsh/chiggins.zsh-theme -O ~/.oh-my-zsh/themes/chiggins.zsh-theme --no-check-certificate
+wget https://github.com/Chiggins/DotFiles/raw/master/general/zshrc -O ~/.zshrc --no-check-certificate
+wget https://github.com/Chiggins/DotFiles/raw/master/general/chiggins.zsh-theme -O ~/.oh-my-zsh/themes/chiggins.zsh-theme --no-check-certificate
 chsh -s /usr/bin/zsh
 
 echo 'runtime vimrc' > ~/.vimrc
@@ -18,10 +18,10 @@ then
     mkdir ~/.vim
 fi
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
-wget https://github.com/Chiggins/DotFiles/raw/master/vim/vimrc -O ~/.vimrc --no-check-certificate
+wget https://github.com/Chiggins/DotFiles/raw/master/general/vimrc -O ~/.vimrc --no-check-certificate
 vim +PluginInstall +qall
 
-wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/tmux/.tmux.conf -O ~/.tmux.conf --no-check-certificate
+wget https://raw.githubusercontent.com/Chiggins/DotFiles/master/general/tmux.conf -O ~/.tmux.conf --no-check-certificate
 
 # Install RVM
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
