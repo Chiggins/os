@@ -2,7 +2,7 @@
 # Chiggins bootstrap script for Remnux
 
 # Install zsh, oh-my-zsh, and custom theme
-sudo apt-get install -y zsh ctags tmux vim
+sudo apt-get install -y zsh ctags tmux vim curl git
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 if [ -d ~/.zshrc ]
 then
@@ -28,4 +28,4 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 # Remove this script
-rm remnux.sh
+#rm remnux.sh
